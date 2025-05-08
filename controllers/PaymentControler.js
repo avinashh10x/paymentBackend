@@ -73,4 +73,13 @@ const verifyPayment = async (req, res) => {
     }
 }
 
-export { checkout, verifyPayment };
+const paymentVarified = async (req, res) => {
+    try {
+        res.send('payment varified')
+    } catch (error) {
+        console.log("error in payment varified", error)
+
+    }
+}
+
+export { checkout, verifyPayment, paymentVarified };

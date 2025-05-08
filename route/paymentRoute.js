@@ -1,5 +1,5 @@
 import express from 'express'
-import { checkout, verifyPayment } from '../controllers/PaymentControler.js'
+import { checkout, paymentVarified, verifyPayment } from '../controllers/PaymentControler.js'
 
 const paymentRoutes = express.Router()
 
@@ -10,5 +10,6 @@ paymentRoutes.get('/', (req, res) => {
 
 paymentRoutes.post('/checkout', checkout)
 paymentRoutes.post('/payment-verification', verifyPayment)
+paymentRoutes.get('/paymentVerified', paymentVarified )
 
 export default paymentRoutes
