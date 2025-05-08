@@ -10,25 +10,31 @@ const razorpay = new Razorpay({
 });
 
 const checkout = async (req, res) => {
-    const { name, amount } = req.body
 
-    const order = await razorpay.orders.create(
-        {
-            amount: Number(amount * 100),
-            currency: "INR"
-        }
-    )
+    try {
+        const { name, amount } = req.body
+        // console.log(name,amount)
 
-    await paymentModel.create({
-        order_id: order.id,
-        name: name,
-        amount: amount,
-    })
+        const order = await razorpay.orders.create(
+            {
+                amount: Number(amount),
+                currency: "INR"
+            }
+        )
+
+        await paymentModel.create({
+            order_id: order.id,
+            name: name,
+            amount: amount,
+        })
 
 
-    console.log({ order })
-    res.json({ order })
+        console.log({ order })
+        res.json({ order })
 
+    } catch (error) {
+        console.log("error in checkout api::", error)
+    }
 }
 
 
