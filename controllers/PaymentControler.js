@@ -60,15 +60,7 @@ const verifyPayment = async (req, res) => {
 
         console.log('Updated Document:', updatedDocument);
 
-        if (window.location.port === 5173) {
-            res.redirect('http://localhost:5173/success?razorpay_payment_id=' + razorpay_payment_id);
-        } else if (window.location.port === 3000) {
-            res.redirect('http://localhost:8000/success?razorpay_payment_id=' + razorpay_payment_id);
-        } else if (window.location.port === 5500) {
-            res.redirect('http://127.0.0.1:5500/Ecomm-UI/success.html');
-        } else {
-            res.redirect('http://localhost:5173/success?razorpay_payment_id=' + razorpay_payment_id);
-        }
+        res.redirect('http://127.0.0.1:5500/Ecomm-UI/success.html');
 
         if (!isValid) {
             console.log('Invalid signature. Payment verification failed.');
