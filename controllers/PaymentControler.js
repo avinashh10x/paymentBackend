@@ -59,7 +59,22 @@ const verifyPayment = async (req, res) => {
         );
 
         console.log('Updated Document:', updatedDocument);
-        res.redirect('http://localhost:5173/success?razorpay_payment_id=' + razorpay_payment_id);
+
+        if (window.location.port === 5173) {
+            res.redirect('http://localhost:5173/success?razorpay_payment_id=' + razorpay_payment_id);
+        } else if (window.location.port === 3000) {
+            res.redirect('http://localhost:8000/success?razorpay_payment_id=' + razorpay_payment_id);
+        } else if (window.location.port === 5500) {
+            res.redirect('http://localhost:5500/success?razorpay_payment_id=' + razorpay_payment_id);
+        } else {
+            res.redirect('http://localhost:5173/success?razorpay_payment_id=' + razorpay_payment_id);
+        }
+
+        if (!isValid) {
+            console.log('Invalid signature. Payment verification failed.');
+            res.redirect('http://localhost:5173/failed');
+        }
+
     } catch (error) {
         console.error('Error updating document:', error);
         res.redirect('http://localhost:5173/failed');
